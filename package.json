@@ -1,7 +1,7 @@
 {
   "name": "zotero-annotation-manage",
-  "version": "0.8.2",
-  "description": "一个tag管理工具，方便自己管理annotation和tag，进行各种汇总统计，让批注不白做。",
+  "version": "0.9.0",
+  "description": "一个tag管理工具，方便自己管理annotation和tag，进行各种汇总统计，让批注不白做。Forked for Zotero 10 compatibility.",
   "config": {
     "addonName": "zotero-annotation-manage",
     "addonID": "annotationmanage@zknu.edu.cn",
@@ -11,13 +11,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zzlb0224/zotero-annotation-manage.git"
+    "url": "git+https://github.com/mingf23/zotero-annotation-manage.git"
   },
   "author": "zzlb0224",
   "bugs": {
-    "url": "https://github.com/zzlb0224/zotero-annotation-manage/issues"
+    "url": "https://github.com/mingf23/zotero-annotation-manage/issues"
   },
-  "homepage": "https://github.com/zzlb0224/zotero-annotation-manage#readme",
+  "homepage": "https://github.com/mingf23/zotero-annotation-manage#readme",
   "license": "AGPL-3.0-or-later",
   "scripts": {
     "reinstall": "rd /S /Q node_modules && del /S /Q package-lock.json && npm install && npm run lint:fix && npm run build",

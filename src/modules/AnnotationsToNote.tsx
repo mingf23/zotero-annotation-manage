@@ -18,6 +18,7 @@ import {
   str2RegExps,
   toggleProperty,
 } from "../utils/zzlb";
+import { getSelectedCollectionID, getSelectedLibraryID } from "../utils/zoteroCompat";
 import { getSelectedItems, createActionTag } from "./menu";
 import { showTitle } from "./RelationHeader";
 import { groupBy } from "../utils/groupBy";
@@ -1307,8 +1308,8 @@ export async function saveNote(targetNoteItem: Zotero.Item, txt: string, pw: Pro
 }
 export async function createNote(txt = "", pw: ProgressWindowHelper | undefined = undefined) {
   const targetNoteItem = new Zotero.Item("note");
-  targetNoteItem.libraryID = Zotero.getActiveZoteroPane().getSelectedLibraryID();
-  const selected = Zotero.getActiveZoteroPane().getSelectedCollection(true);
+  targetNoteItem.libraryID = getSelectedLibraryID();
+  const selected = getSelectedCollectionID();
   if (selected) targetNoteItem.setCollections([selected]);
   else {
     // 这个会破坏用户数据结构，不是必须的

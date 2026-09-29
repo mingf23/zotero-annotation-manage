@@ -26,6 +26,7 @@ declare namespace _ZoteroTypes {
       "windowType": string;
       "blockHUToggle": boolean;
       "show-selected-popup-match-tag": boolean;
+      "FTC": string;
       "fixed-tags-colors": string;
     };
   }

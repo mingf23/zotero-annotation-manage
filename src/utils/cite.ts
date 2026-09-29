@@ -1,4 +1,5 @@
 import { getItem } from "./zzlb";
+import { getSelectedCollectionID, getSelectedLibraryID } from "./zoteroCompat";
 
 interface Rule {
   re: RegExp;
@@ -248,8 +249,8 @@ export async function createItemByZotero(doi: string) {
     const translators = await translate.getTranslators();
     translate.setTranslator(translators);
     ztoolkit.log("identifiers", identifiers, translators);
-    const libraryID = Zotero.getActiveZoteroPane().getSelectedLibraryID();
-    const collections = [Zotero.getActiveZoteroPane().getSelectedCollection(true)];
+    const libraryID = getSelectedLibraryID();
+    const collections = [getSelectedCollectionID()].filter((id): id is number => typeof id === "number");
     return (
       await translate.translate({
         libraryID,

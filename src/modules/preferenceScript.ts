@@ -17,6 +17,7 @@ import {
   memOptionalColor,
   memRelateTags,
 } from "../utils/zzlb";
+import { getSelectedCollection } from "../utils/zoteroCompat";
 import annotations from "./annotations";
 
 export function registerPrefsWindow() {
@@ -375,7 +376,7 @@ function bindFixedColors(doc: Document) {
   async function showCurrentCollection() {
     if (!currentCollection) return;
     currentCollection.innerHTML = "固定标签配置";
-    const selectedCollection = Zotero.getActiveZoteroPane().getSelectedCollection(false);
+    const selectedCollection = getSelectedCollection();
     if (selectedCollection) {
       collectionKey = selectedCollection.key;
       ztoolkit.UI.appendElement(
@@ -552,7 +553,7 @@ async function replaceTagsPreviewDiv(doc?: Document) {
       }
     }
     if (!ann) {
-      const sc = Zotero.getActiveZoteroPane().getSelectedCollection();
+      const sc = getSelectedCollection();
       if (sc) {
         const pdfs = sc.getChildItems(false, false).flatMap((f) => f.getAttachments());
         if (pdfs) {
@@ -568,7 +569,7 @@ async function replaceTagsPreviewDiv(doc?: Document) {
       }
     }
     if (!ann) {
-      const sc = Zotero.getActiveZoteroPane().getSelectedCollection();
+      const sc = getSelectedCollection();
       if (sc) {
         const pdfs = getChildCollections([sc])
           ?.flatMap((f) => f.getChildItems(false, false))

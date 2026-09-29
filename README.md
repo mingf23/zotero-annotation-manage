@@ -1,11 +1,13 @@
 # ![笔记标签整Zotero的笔记整理理](addon/chrome/content/icons/favicon.png)Zotero的笔记整理
 
-[![zotero target version](https://img.shields.io/badge/Zotero-7-green?style=flat-square&logo=zotero&logoColor=CC2936)](https://www.zotero.org)
+[![zotero target version](https://img.shields.io/badge/Zotero-10-green?style=flat-square&logo=zotero&logoColor=CC2936)](https://www.zotero.org)
 [![Using Zotero Plugin Template](https://img.shields.io/badge/Using-Zotero%20Plugin%20Template-blue?style=flat-square&logo=github)](https://github.com/windingwind/zotero-plugin-template)
 
 一个tag管理工具，方便自己管理annotation和tag，进行各种汇总统计，让笔记不白做。
 
 希望能够实现自己关于笔记整理的想法
+
+本仓库是 [zzlb0224/zotero-annotation-manage](https://github.com/zzlb0224/zotero-annotation-manage) 的 fork，用于兼容 Zotero 10，并默认使用个人固定色码标签。
 
 ## 有趣的图标
 
@@ -26,8 +28,14 @@
 ## 注意
 
 - 需要安装 [@windingwind](https://github.com/windingwind)的[BetterNotes](https://github.com/windingwind/zotero-better-notes/releases/) 才能使用导出功能。
-- 支持Zotero 8.0。
+- 支持Zotero 10.0。
 - node 版本 22.22.0
+
+## Fork 变更
+
+- `strict_max_version` → `10.0.*`
+- 适配 Zotero 10 复数 selection API（`getSelectedCollections` / `getSelectedLibraryIDs`）
+- 默认固定标签/颜色（`FTC`）：`argument✍🏻`、`important❗️`、`concept♻️`、`example💫`、`question❔`、`method🛠️`、`theory🎼`、`quote💎`、`agreement✅`、`divergence❌`、`past⬅️`、`present↕️`、`future➡️`、`vocabulary🔠`、`thesis⚠️`
 
 ## 功能介绍
 
@@ -126,11 +134,10 @@
 
 ### 建议的固定标签配置
 
-根据个人习惯配置固定在前面的标签。我为你准备了这么多，你看够不够用？
-评ps:另外颜色要用小写，不然可能会报错颜色错误。感谢 [@Geo123abc] 提的想法
+默认已配置下列色码（可在插件首选项中修改）。颜色请用小写。
 
 ```
-目的, #ffd400,  假设, #ff6666,  框架, #5fb236,  数据, #2ea8e5量表, #a28ae5, 方法, #e56eee, 理论, #f19837, 结论, #aaaaaa, 贡献, #69af15, 未来, #ba898e, 背景, #ee8574, 现状, #6a99e7, 问题, #e65fa1, 对策, #62e0ef
+argument✍🏻, #ffd400, important❗️, #ff6666, concept♻️, #5fb236, example💫, #2ea8e5, question❔, #a28ae5, method🛠️, #e56eee, theory🎼, #f19837, quote💎, #aaaaaa, agreement✅, #94fb68, divergence❌, #b51f58, past⬅️, #ee8574, present↕️, #6a99e7, future➡️, #62e0ef, vocabulary🔠,#0066e2, thesis⚠️, #a59a2d
 ```
 
 ## 感谢
@@ -150,13 +157,13 @@ Nested Tags 的灵感来自 [Zotero-Style](https://github.com/MuiseDestiny/zoter
 ## Reminder
 
 - This plugin required @windingwind's [BetterNotes](https://github.com/windingwind/zotero-better-notes/releases/)
-- upports Zotero 8.0
+- Supports Zotero 10.0 (this fork)
 
 ## Disclaimer
 
 This plugin based on @windingwind's [zotero-plugin-template](https://github.com/windingwind/zotero-plugin-template)，many thanks for his team's hard working。
 
-We also acknowledge @windingwind's [Zotero Plugin Toolkit](https://github.com/windingwind/zotero-plugin-toolkit)。
+Forked from [zzlb0224/zotero-annotation-manage](https://github.com/zzlb0224/zotero-annotation-manage) for Zotero 10 compatibility.
 
 ## License
 

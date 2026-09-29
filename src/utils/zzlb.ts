@@ -11,6 +11,7 @@ import { uniqueBy } from "./uniqueBy";
 // import { ProgressWindowHelper } from "zotero-plugin-toolkit/dist/helpers/progressWindow";
 import { getString } from "./locale";
 import { ProgressWindowHelper, TagElementProps } from "zotero-plugin-toolkit";
+import { getSelectedCollection, getSelectedCollectionID } from "./zoteroCompat";
 export class TagColor {
   public color: string;
   public tag: string;
@@ -48,13 +49,13 @@ export function getChildCollections(collections: Zotero.Collection[]): Zotero.Co
   if (childCollections.length == 0) return [];
   return [...childCollections, ...getChildCollections(childCollections)];
 }
-export const FixedTagsDefault = "目的,假设,框架,数据,量表,方法,理论,结论,贡献,未来,背景,现状,问题,对策";
+// Default color/tag scheme from local Zotero prefs (extensions.zotero.annotationmanage.FTC)
+export const FixedTagsDefault =
+  "argument✍🏻,important❗️,concept♻️,example💫,question❔,method🛠️,theory🎼,quote💎,agreement✅,divergence❌,past⬅️,present↕️,future➡️,vocabulary🔠,thesis⚠️";
 export const FixedColorDefault =
-  "#ffd400, #ff6666, #5fb236, #2ea8e5, #a28ae5, #e56eee, #f19837, #aaaaaa, #69af15, #ba898e, #ee8574, #6a99e7, #e65fa1, #62e0ef, #f7e8b2";
-const FixedColorDefaultArray = FixedColorDefault.split(",").map((f) => f.trim());
-export const FixedTagsColorsDefault = FixedTagsDefault.split(",")
-  .flatMap((f, i) => [f.trim(), FixedColorDefaultArray[i]])
-  .join(", ");
+  "#ffd400, #ff6666, #5fb236, #2ea8e5, #a28ae5, #e56eee, #f19837, #aaaaaa, #94fb68, #b51f58, #ee8574, #6a99e7, #62e0ef, #0066e2, #a59a2d";
+export const FixedTagsColorsDefault =
+  "argument✍🏻, #ffd400, important❗️, #ff6666, concept♻️, #5fb236, example💫, #2ea8e5, question❔, #a28ae5, method🛠️, #e56eee, theory🎼, #f19837, quote💎, #aaaaaa, agreement✅, #94fb68, divergence❌, #b51f58, past⬅️, #ee8574, present↕️, #6a99e7, future➡️, #62e0ef, vocabulary🔠,#0066e2, thesis⚠️, #a59a2d";
 export const COLOR = {
   red: "#ff6666",
   orange: "#f19837",
@@ -109,7 +110,7 @@ export const memFixedColor = memoize(
 export const memFixedTagColors = memoize(getFixedTagColors, getCollectionKey);
 
 function getCollectionKey(collectionKey: string | undefined = undefined) {
-  return collectionKey === undefined ? Zotero.getActiveZoteroPane().getSelectedCollection()?.key || "" : collectionKey;
+  return collectionKey === undefined ? getSelectedCollection()?.key || "" : collectionKey;
 }
 
 function getFixedTagColors(collectionKey: string | undefined = undefined) {
@@ -289,7 +290,7 @@ function getItemRelateCollections(item?: Zotero.Item): Zotero.Collection[] {
   const prefSelectedCollection = !!getPref("selected-collection");
   const prefCurrentCollection = !!getPref("current-collection");
   if (prefSelectedCollection) {
-    const selectedCollectionId = Zotero.getActiveZoteroPane().getSelectedCollection(true);
+    const selectedCollectionId = getSelectedCollectionID();
     if (selectedCollectionId) allCollectionIds.push(selectedCollectionId);
   }
   if (prefCurrentCollection) {

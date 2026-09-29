@@ -10,6 +10,7 @@ import { sortBy, sortValuesLengthKeyAsc } from "../utils/sort";
 import { Tab } from "../utils/tab";
 import { uniqueBy } from "../utils/uniqueBy";
 import { ReTest, clearChild, createDialog, getChildCollections, isDebug, memFixedColor, stopPropagation } from "../utils/zzlb";
+import { getSelectedCollection } from "../utils/zoteroCompat";
 import {
   createAnnotationMatrix,
   createChooseTagsDiv,
@@ -152,7 +153,7 @@ function buildMenu(collectionOrItem: "collection" | "item") {
           const mainWindow = Zotero.getMainWindow();
           let header = "";
           if (collectionOrItem == "collection") {
-            header = `collection:${Zotero.getActiveZoteroPane().getSelectedCollection()?.name}`;
+            header = `collection:${getSelectedCollection()?.name}`;
           } else if (items.length == 1) {
             header = `单条目:${items[0].getDisplayTitle()}`;
           } else {
@@ -297,7 +298,7 @@ function buildMenu(collectionOrItem: "collection" | "item") {
           const mainWindow = Zotero.getMainWindow();
           let header = "";
           if (collectionOrItem == "collection") {
-            header = `collection:${Zotero.getActiveZoteroPane().getSelectedCollection()?.name}`;
+            header = `collection:${getSelectedCollection()?.name}`;
           } else if (items.length == 1) {
             header = `单条目:${items[0].getDisplayTitle()}`;
           } else {
@@ -726,7 +727,7 @@ export function createActionTag(
 export async function getSelectedItems(isCollectionOrItem: boolean | "collection" | "item") {
   let items: Zotero.Item[] = [];
   if (isCollectionOrItem === true || isCollectionOrItem === "collection") {
-    const selected = Zotero.getActiveZoteroPane().getSelectedCollection();
+    const selected = getSelectedCollection();
     ztoolkit.log(isCollectionOrItem, selected);
     if (selected) {
       const cs = uniqueBy([selected, ...getChildCollections([selected])], (u) => u.key);

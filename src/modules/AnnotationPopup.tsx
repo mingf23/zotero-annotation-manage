@@ -22,6 +22,7 @@ import {
   str2RegExps,
   getItem,
 } from "../utils/zzlb";
+import { getSelectedCollection } from "../utils/zoteroCompat";
 import { uniqueBy } from "../utils/uniqueBy";
 import { groupByResult } from "../utils/groupBy";
 import { groupBy } from "../utils/groupBy";
@@ -1080,7 +1081,7 @@ export class AnnotationPopup {
         fontSize: this.fontSize,
       },
       properties: {
-        textContent: this.searchTag ? "搜索中" : `${Zotero.getActiveZoteroPane().getSelectedCollection()?.name || ""}`,
+        textContent: this.searchTag ? "搜索中" : `${getSelectedCollection()?.name || ""}`,
       },
       children,
     };
